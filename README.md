@@ -4,7 +4,7 @@ A simple website for a doggy daycare. Built with HTML, CSS and JavaScript.
 
 ## About
 
-I created this project as part of my JavaScript studies. The purpose was to practice working with the DOM, events and user input.
+I created this project as part of Frontend studies. The purpose was to practice working with the DOM, events and user input.
 
 ## Features
 
