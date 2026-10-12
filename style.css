@@ -74,4 +74,149 @@ main section h2 {
     gap:1.5rem;
 }
 
+#tjanster h2,
+#tjanster > p {
+    grid-column: 1 / -1;
+}
 
+#tjanster article {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0,8);
+}
+
+#tjanster article h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+}
+
+#tjanster article p {
+    margin-bottom: 0.75rem;
+}
+
+#tjanster article p:last-child {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+    #tjanster {
+        grid-template-columns: 1fr;
+    }
+}    
+
+/* Öppettider */
+#oppettider {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#oppettider ul {
+    list-style: none;
+}
+
+#oppettider li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+#oppettider :last-child {
+    border-bottom: none;
+}
+
+/* Bokningsformulär */
+#boka {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#boka fieldset {
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+#boka legend {
+    font-weight: bold;
+    padding: 0 0.5rem;
+}
+
+#boka label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+}
+
+#boka input,
+#boka select,
+#boka textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font: inherit;
+}
+
+#boka input:focus,
+#boka select:focus,
+#boka textarea:focus {
+    outline: 2px solid #8b5e3c;
+    outline-offset: 2px;
+}
+
+#boka button {
+    background-color: #8b5e3c;
+    color: #ffffff;
+    padding: 0.9rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#boka button:hover {
+    background-color: #70482d;
+}
+
+@media (max-width: 600px) {
+    #boka {
+        padding: 1rem;
+    }
+
+    #boka fieldset {
+        padding: 0.75rem;
+    }
+}
+
+/* Personal */
+.personal-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.personal {
+    flex: 1 1 300px;
+    max-width: 450px;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.personal img {
+    display: block;
+    width: 100%;
+    max-width: 250px;
+    
+
+}
