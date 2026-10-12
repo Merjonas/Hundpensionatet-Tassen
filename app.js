@@ -39,3 +39,10 @@ function updateOpeningStatus() {
     }    
 }
 
+updateDateTime();
+updateOpeningStatus();
+
+setInterval(updateDateTime, 1000);
+setInterval(updateOpeningStatus, 1000);
+
+const bookingForm = document.getElementById("booking-form");
