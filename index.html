@@ -86,7 +86,7 @@
             <h2>Boka tid</h2>
             <p>Fyll i formuläret nedan för att skicka en bokningsförfrågan. Vi återkommer till dig för att bekräfta bokningen.</p>
 
-            <form>
+            <form id="booking-form">
 
                 <fieldset>
                     <legend>Ägarens uppgifter</legend>
@@ -151,6 +151,14 @@
                 <button type="submit">Skicka bokningsförfrågan</button>
     
             </form>
+                <section id="mina-bokningar">
+                    <h3>Mina bokningar</h3>
+
+                    <div id="booking-list" aria-live="polite">
+                    <p>Du har inga bokningar ännu.</p>
+                </div>
+            </section>
+
         </section>
 
 
