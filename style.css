@@ -4,10 +4,55 @@
     padding: 0;
 }
 
-/* Grundläggande styling */
+/* Grundstyling */
 body {
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6;
     color: #333333;
     background-color: #f5f5f5;
 }
+
+/* header */    
+header {
+    background-color: #f5f5f5;
+    padding: 2rem;
+    text-align: center;
+}
+
+header img {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+header h1 {
+font-size: 2rem;
+margin-bottom: 1.5rem;
+}
+
+    /* Navigering */
+header nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+header nav a {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+header nav a {
+    color: #333333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav a:hover {    
+color: #8b5e3c;
+}
+
