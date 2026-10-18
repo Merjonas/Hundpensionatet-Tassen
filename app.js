@@ -34,6 +34,22 @@ function updateOpeningStatus() {
     }    
 }
 
+function setMinimumDate() {
+    const now = new Date();
+    const today = [
+        now.getFullYear(),
+        String(now.getMonth() + 1).padStart(2, "0"),
+        String(now.getDate()).padStart(2, "0")
+    ].join("-");
+
+    const startDateInput = document.getElementById("startdatum");
+    const endDateInput = document.getElementById("slutdatum");
+
+    startDateInput.min = today;
+    endDateInput.min = today;
+}
+setMinimumDate();
+
 updateDateTime();
 updateOpeningStatus();
 setInterval(updateDateTime, 1000);
@@ -57,6 +73,13 @@ function loadBookings() {
 
 bookingForm.addEventListener("submit", function(event) {
     event.preventDefault();
+    const today = new Date().toISOString().split("T")[0];
+    const startDate = document.getElementById("startdatum").value;
+
+    if (startDate < today) {
+        alert("Startdatum måste vara framåt i tiden.");
+        return;
+    }
 
     const booking = {
         id: crypto.randomUUID(),
