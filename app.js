@@ -138,9 +138,7 @@ bookingForm.addEventListener("submit", function(event) {
         return;
     }
 
-    bookings.push(booking);
-
-    saveBookings();
+    bokningslista.laggTill(booking);
     renderBookings();
     bookingForm.reset();
 });
@@ -149,14 +147,14 @@ function renderBookings() {
     const bookingList = document.getElementById("booking-list");
     bookingList.replaceChildren();
 
-    if (bookings.length === 0) {
+    if (bokningslista.bokningar.length === 0) {
         const message = document.createElement("p");
         message.textContent = "Inga bokningar hittas.";
         bookingList.appendChild(message);
         return;
     }
     
-    bookings.forEach(function(booking) {
+    bokningslista.bokningar.forEach(function(booking) {
         const article = document.createElement("article");
         const heading = document.createElement("h4");
         heading.textContent = booking.dogName;
