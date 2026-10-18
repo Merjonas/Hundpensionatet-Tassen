@@ -64,3 +64,6 @@ Hundpensionatet-Tassen/
 ├── index.html
 ├── style.css
 └── app.js
+
+## Usage of AI
+I've used AI to check for spelling mistakes and bugs.

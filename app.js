@@ -1,6 +1,6 @@
 function updateDateTime() {
     const now = new Date();
-    const dateTimeElement = document.getElementById("current-datetime")
+    const dateTimeElement = document.getElementById("current-datetime");
         dateTimeElement.textContent = now.toLocaleString("sv-SE", {
             weekday: "long",
             year: "numeric",
@@ -34,22 +34,34 @@ function updateOpeningStatus() {
     }    
 }
 
-function setMinimumDate() {
+function getTodayDate() {
     const now = new Date();
-    const today = [
+    return [
         now.getFullYear(),
         String(now.getMonth() + 1).padStart(2, "0"),
         String(now.getDate()).padStart(2, "0")
     ].join("-");
+}
 
+function setMinimumDate() {
+    const today = getTodayDate();
     const startDateInput = document.getElementById("startdatum");
     const endDateInput = document.getElementById("slutdatum");
-
     startDateInput.min = today;
     endDateInput.min = today;
-}
-setMinimumDate();
 
+    startDateInput.addEventListener("change", function() {
+        endDateInput.min = startDateInput.value || today;
+        if (
+            endDateInput.value &&
+            endDateInput.value < endDateInput.min
+        ) {
+            endDateInput.value = "";
+        }
+    });
+}
+
+setMinimumDate();
 updateDateTime();
 updateOpeningStatus();
 setInterval(updateDateTime, 1000);
@@ -97,29 +109,16 @@ class Bokningslista {
 const bokningslista = new Bokningslista();
 bokningslista.ladda();
 
-function saveBookings() {
-    localStorage.setItem("tassen-bookings", JSON.stringify(bookings))
-}
-
-function loadBookings() {
-    const savedBookings = localStorage.getItem("tassen-bookings")
-
-    if (savedBookings !== null) {
-        bookings = JSON.parse(savedBookings);
-    }
-}
-
 bookingForm.addEventListener("submit", function(event) {
     event.preventDefault();
-    const today = new Date().toISOString().split("T")[0];
+    const today = getTodayDate();
     const startDate = document.getElementById("startdatum").value;
+        if (startDate < today) {
+            alert("Startdatum måste vara framåt i tiden.");
+            return;
+        }
 
-    if (startDate < today) {
-        alert("Startdatum måste vara framåt i tiden.");
-        return;
-    }
-
-    const booking = {
+const booking = {
         id: crypto.randomUUID(),
         customerName: document.getElementById("namn").value,
         email: document.getElementById("email").value,
@@ -192,7 +191,6 @@ function removeBooking(bookingId) {
     }
 }
 
-    bokningslista.ladda();
     renderBookings();
 
 const weatherForm = document.getElementById("weather-form");
