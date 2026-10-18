@@ -55,8 +55,6 @@ function loadBookings() {
     }
 }
 
-loadBookings();
-
 bookingForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -84,3 +82,37 @@ bookingForm.addEventListener("submit", function(event) {
     bookingForm.reset();
 });
 
+function renderBookings() {
+    const bookingList = document.getElementById("booking-list")
+    bookingList.replaceChildren();
+        if (bookings.length === 0) {
+            const message = document.createElement("p")
+            message.textContent = "Du har inga bokningar ännu.";
+            bookingList.appendChild(message);
+            return;
+        }
+        bookings.forEach(function(booking) {
+            const article = document.createElement("article")
+            const heading = document.createElement("h4");
+            heading.textContent = booking.dogName;
+            const customer = document.createElement("p");
+            const dates = document.createElement("p");
+            dates.textContent = "Tjänst: " + booking.customerName;
+            const service = document.createElement("p")
+            dates.textContent = "Datum: " + booking.startDate + " - " + booking.endDate;
+            article.append(heading, customer, service, dates);
+            bookingList.appendChild(article);
+        });
+    }
+
+    const removeButton = document.createElement("button")
+    removeButton.textContent = "Ta bort bokning.";
+    removeButton.type = "button";
+    removeButton.addEventListener("click", function() {
+        removeBooking(bookings.id);
+    })
+    
+    loadBookings(),
+    renderBookings()
+
+    
