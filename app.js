@@ -86,9 +86,9 @@ bookingForm.addEventListener("submit", function(event) {
 
 function renderBookings() {
     const bookingList = document.getElementById("booking-list");
-    bookingList.renderChildren = "";
+    bookingList.replaceChildren();
 
-    if (bookings.Length === 0) {
+    if (bookings.length === 0) {
         const message = document.createElement("p");
         message.textContent = "Inga bokningar hittas.";
         bookingList.appendChild(message);
@@ -135,6 +135,6 @@ function removeBooking(bookingId) {
 
     loadBookings();
     renderBookings();
-    
+
 
     
