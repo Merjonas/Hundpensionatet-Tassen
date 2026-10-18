@@ -166,7 +166,62 @@ function removeBooking(bookingId) {
 const weatherForm = document.getElementById("weather-form");
 const weatherLocation = document.getElementById("weather-location");
 const weatherStatus = document.getElementById("weather-status");
-const weatherRestult = document.getElementById("weather-result");
+const weatherResult = document.getElementById("weather-result");
 
+async function getWeather(location) {
+    const getcodingURL =  `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=1&language=sv&format=json`;
+    const locationResponse = await fetch(getcodingURL);
+        if (!locationResponse.ok) {
+            throw new Error("Kunde inte hämta platsinformation.");
+        }
 
+    const locationData = await locationResponse.json();
+        if (!locationData.results || locationData.results.length === 0) {
+            throw new Error("Kunde inte hitta plats.");
+        }
     
+    const place = locationData.results[0];
+    const forecastURL = `https://api.open-meteo.com/v1/forecast?latitude=${place.latitude}&longitude=${place.longitude}&current=temperature_2m,weather_code&timezone=auto`;
+    const weatherResponse = await fetch(forecastURL);
+        if (!weatherResponse.ok) {
+            throw new Error("Kunde inte hämta väderinformation.");
+        }
+    
+    const weatherData = await weatherResponse.json();
+        return {
+                city: place.name,
+                country: place.country,
+                temperature: weatherData.current.temperature_2m,
+                weatherCode: weatherData.current.weather_code
+        }
+}
+
+weatherForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    const location = weatherLocation.value.trim();
+    weatherResult.replaceChildren();
+        if (location === "") {
+            weatherStatus.textContent = "Vänligen ange en plats.";
+            return;
+        }
+    
+        weatherStatus.textContent = "Hämtar väderinformation...";
+        weatherStatus.dataset.status = "loading";
+            try {
+                const weather = await getWeather(location);
+                const heading = document.createElement("h3");
+                heading.textContent = `Väder i ${weather.city}, ${weather.country}`;
+                const temperature = document.createElement("p");
+                temperature.textContent = `Temperatur: ${weather.temperature} °C`;
+                const description = document.createElement("p");
+                description.textContent = `Väderkod: ${weather.weatherCode}`;
+                weatherResult.append(heading, temperature, description);
+                weatherStatus.textContent = "Väderinformation hämtad.";
+                weatherStatus.dataset.status = "success";
+            }
+            catch (error) {
+                weatherStatus.textContent = error.message;
+                weatherStatus.dataset.status = "error";
+                weatherResult.replaceChildren();
+            }
+});
