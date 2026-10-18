@@ -163,5 +163,10 @@ function removeBooking(bookingId) {
     loadBookings();
     renderBookings();
 
+const weatherForm = document.getElementById("weather-form");
+const weatherLocation = document.getElementById("weather-location");
+const weatherStatus = document.getElementById("weather-status");
+const weatherRestult = document.getElementById("weather-result");
+
 
     
