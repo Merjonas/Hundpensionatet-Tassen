@@ -57,7 +57,45 @@ setInterval(updateOpeningStatus, 1000);
 
 const bookingForm = document.getElementById("booking-form");
 
-let bookings = [];
+class Bokningslista {
+    constructor() {
+        this.bokningar = [];
+    }
+
+    laggTill(bokning) {
+        this.bokningar.push(bokning);
+        this.spara();
+    }
+
+    taBort(id) {
+        this.bokningar = this.bokningar.filter(function(bokning) {
+            return bokning.id !== id;
+        });
+        this.spara();
+    }
+
+    spara() {
+        localStorage.setItem("tassen-bookings", JSON.stringify(this.bokningar));
+    }
+
+    ladda() {
+        const sparadeBokningar = localStorage.getItem("tassen-bookings");
+        if (sparadeBokningar !== null) {
+            try {
+                const data = JSON.parse(sparadeBokningar);
+                if (Array.isArray(data)) {
+                    this.bokningar = data;
+                }
+            } catch (error) {
+                console.error("Fel vid inläsning av bokningar:", error);
+                this.bokningar = [];
+            }
+        }    
+    }
+}
+
+const bokningslista = new Bokningslista();
+bokningslista.ladda();
 
 function saveBookings() {
     localStorage.setItem("tassen-bookings", JSON.stringify(bookings))
