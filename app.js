@@ -59,6 +59,7 @@ bookingForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
     const booking = {
+        id: crypto.randomUUID(),
         customerName: document.getElementById("namn").value,
         email: document.getElementById("email").value,
         phone: document.getElementById("telefon").value,
@@ -79,40 +80,61 @@ bookingForm.addEventListener("submit", function(event) {
     bookings.push(booking);
 
     saveBookings();
+    renderBookings();
     bookingForm.reset();
 });
 
 function renderBookings() {
-    const bookingList = document.getElementById("booking-list")
-    bookingList.replaceChildren();
-        if (bookings.length === 0) {
-            const message = document.createElement("p")
-            message.textContent = "Du har inga bokningar ännu.";
-            bookingList.appendChild(message);
-            return;
-        }
-        bookings.forEach(function(booking) {
-            const article = document.createElement("article")
-            const heading = document.createElement("h4");
-            heading.textContent = booking.dogName;
-            const customer = document.createElement("p");
-            const dates = document.createElement("p");
-            dates.textContent = "Tjänst: " + booking.customerName;
-            const service = document.createElement("p")
-            dates.textContent = "Datum: " + booking.startDate + " - " + booking.endDate;
-            article.append(heading, customer, service, dates);
-            bookingList.appendChild(article);
-        });
-    }
+    const bookingList = document.getElementById("booking-list");
+    bookingList.renderChildren = "";
 
-    const removeButton = document.createElement("button")
-    removeButton.textContent = "Ta bort bokning.";
-    removeButton.type = "button";
-    removeButton.addEventListener("click", function() {
-        removeBooking(bookings.id);
-    })
+    if (bookings.Length === 0) {
+        const message = document.createElement("p");
+        message.textContent = "Inga bokningar hittas.";
+        bookingList.appendChild(message);
+        return;
+    }
     
-    loadBookings(),
-    renderBookings()
+    bookings.forEach(function(booking) {
+        const article = document.createElement("article");
+        const heading = document.createElement("h4");
+        heading.textContent = booking.dogName;
+        const customer = document.createElement("p");
+        customer.textContent = "Ägare: " + booking.customerName;
+        const service = document.createElement("p");
+        service.textContent = "Tjänst: " + booking.service;
+        const dates = document.createElement("p");
+        dates.textContent = "Datum: " + booking.startDate + " - " + booking.endDate;
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Ta bort bokning.";
+        removeButton.type = "button";
+        removeButton.addEventListener("click", function() {
+            removeBooking(booking.id);
+        });
+
+        article.append(
+            heading,
+            customer,
+            service,
+            dates,
+            removeButton
+        );
+
+        bookingList.appendChild(article);
+    });
+}
+
+function removeBooking(bookingId) {
+    bookings = bookings.filter(function(booking) {
+        return booking.id !== bookingId;
+    });
+
+    saveBookings();
+    renderBookings();
+}
+
+    loadBookings();
+    renderBookings();
+    
 
     
