@@ -214,7 +214,7 @@ weatherForm.addEventListener("submit", async function(event) {
                 const temperature = document.createElement("p");
                 temperature.textContent = `Temperatur: ${weather.temperature} °C`;
                 const description = document.createElement("p");
-                description.textContent = `Väderkod: ${weather.weatherCode}`;
+                description.textContent = `Väder: ${getWeatherDescription(weather.weatherCode)}`;
                 weatherResult.append(heading, temperature, description);
                 weatherStatus.textContent = "Väderinformation hämtad.";
                 weatherStatus.dataset.status = "success";
@@ -225,3 +225,35 @@ weatherForm.addEventListener("submit", async function(event) {
                 weatherResult.replaceChildren();
             }
 });
+
+function getWeatherDescription(code) {
+    if (code === 0) {
+        return "Klar himmel";
+    }
+
+    if ([1, 2, 3].includes(code)) {
+        return "Delvis molnigt";
+    }
+
+    if ([45, 48].includes(code)) {
+        return "Dimma";
+    }
+
+    if ([51, 53, 55, 56, 57].includes(code)) {
+        return "Duggregn";
+    }
+
+    if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) {
+        return "Regn";
+    }
+
+    if ([71, 73, 75, 77, 85, 86].includes(code)) {
+        return "Snö";
+    }
+
+    if ([95, 96, 99].includes(code)) {
+        return "Åska";
+    }
+
+    return "Väderinformation har hämtats";
+}
