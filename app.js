@@ -125,12 +125,16 @@ function renderBookings() {
 }
 
 function removeBooking(bookingId) {
-    bookings = bookings.filter(function(booking) {
-        return booking.id !== bookingId;
-    });
+    const confirmDelete = confirm("Vill du ta bort bokningen?");
+    
+    if (confirmDelete) {
+        bookings = bookings.filter(function(booking) {
+            return booking.id !== bookingId;
+        });
 
-    saveBookings();
-    renderBookings();
+        saveBookings();
+        renderBookings();
+    }
 }
 
     loadBookings();
