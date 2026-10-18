@@ -187,16 +187,12 @@ function removeBooking(bookingId) {
     const confirmDelete = confirm("Vill du ta bort bokningen?");
     
     if (confirmDelete) {
-        bookings = bookings.filter(function(booking) {
-            return booking.id !== bookingId;
-        });
-
-        saveBookings();
+        bokningslista.taBort(bookingId);
         renderBookings();
     }
 }
 
-    loadBookings();
+    bokningslista.ladda();
     renderBookings();
 
 const weatherForm = document.getElementById("weather-form");
