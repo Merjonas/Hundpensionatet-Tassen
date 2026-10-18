@@ -236,7 +236,7 @@ weatherForm.addEventListener("submit", async function(event) {
         }
     
         weatherStatus.textContent = "Hämtar väderinformation...";
-        weatherStatus.dataset.status = "loading";
+        weatherStatus.dataset.state = "loading";
             try {
                 const weather = await getWeather(location);
                 const heading = document.createElement("h3");
@@ -247,11 +247,11 @@ weatherForm.addEventListener("submit", async function(event) {
                 description.textContent = `Väder: ${getWeatherDescription(weather.weatherCode)}`;
                 weatherResult.append(heading, temperature, description);
                 weatherStatus.textContent = "Väderinformation hämtad.";
-                weatherStatus.dataset.status = "success";
+                weatherStatus.dataset.state = "success";
             }
             catch (error) {
                 weatherStatus.textContent = error.message;
-                weatherStatus.dataset.status = "error";
+                weatherStatus.dataset.state = "error";
                 weatherResult.replaceChildren();
             }
 });
