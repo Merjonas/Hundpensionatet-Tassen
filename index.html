@@ -53,6 +53,24 @@
             </ul>
          </section>
 
+         <section id="Väder">
+            <h2>Väder</h2>
+
+            <p>Väderkontroll</p>
+            <form id="weather-form">
+                <label for="weather-location">Sök på ort:</label>
+                <input type="text" id="weather-location" name="weather-location" placeholder="Ange ort">
+                <button type="submit">Hämta väder</button>
+            </form>
+
+            <p id="weather-status" aria-live="polite">
+                Ange ort för väderinformation
+            </p>
+
+            <div id="weather-result" aria-live="polite"></div>
+         </section>
+
+         
         <section id="tjanster">
             <h2>Våra tjänster</h2>
             <p>Här kan du läsa mer om våra tjänster</p>
