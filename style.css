@@ -296,3 +296,68 @@ footer a:hover {
     }
 }
 
+#weather {
+    background-color: #ffffff;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#weather label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+}
+
+#weather input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font: inherit;
+}
+
+#weather button {
+    background-color: #8b5e3c;
+    color: #ffffff;
+    padding: 0.9rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#weather button:hover {
+    background-color: #70482d;
+}
+
+#weather-status[data-state="loading"] {
+    margin-top: 1rem;
+}
+
+#weather-status[data-state="success"] {
+    margin-top: 1rem;
+    color: #24713b;
+    font-weight: bold;
+}
+
+#weather-status[data-state="error"] {
+    margin-top: 1rem;
+    color: #b42318;
+    font-weight: bold;
+}
+
+#weather-result {
+    margin-top: 1rem;
+}
+
+#weather-result h3 {
+    margin-bottom: 0.5rem;
+}
+
+#weather-result p {
+    margin-bottom: 0.5rem;
+}
